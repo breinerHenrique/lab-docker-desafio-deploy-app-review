@@ -1,14 +1,12 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 as build
-WORKDIR /source
-COPY *sln .
-COPY /Review.Web/*.csproj ./Review.Web/
-RUN dotnet restore
-
-COPY /Review.Web/ ./Review.Web
-RUN dotnet publish -c release -o /app --no-restore
-
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM mcr.microsoft.com/dotnet/sdk:5.0.103-alpine3.12 AS build-env
 WORKDIR /app
-COPY --from=build /app ./
-EXPOSE 8282
-ENTRYPOINT ["dotnet", "Review.Web.dll"]
+COPY Review.Web/*.csproj ./
+RUN dotnet restore 
+COPY . ./
+RUN dotnet publish ./Review.sln -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine3.12
+WORKDIR /app
+COPY --from=build-env /app/out .
+EXPOSE 80
+ENTRYPOINT [ "dotnet", "Review.Web.dll" ]
