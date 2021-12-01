@@ -1,17 +1,13 @@
 # Serviço de Reviews
 
-Esse projeto é um serviço de cadastro de reviews. Ele trabalha cadastrando o review de qualquer elemento.
+Esse projeto faz parte do desafio de Docker realizado durante o curso "Formaçao Kubedev", ministrado por Fabricio Veronez pela Kubedev.io <https://kubedev.io/>.
+
+Trata-se de uma das aplicações do ambiente de Microserviço que foi criado via docker-compose e está disponível em:
+
+- [Rotten Tomatoes](https://github.com/breinerHenrique/lab-docker-desafio-deploy-app)
 
 ## Estrutura do projeto
 
-Esse projeto trabalha com uma base de dados Postgree 
+Esse projeto trabalha com uma base de dados Postgres
 
 ![Diagrama](./img/diagrama.png)
-
-## Configuração
-
-É preciso determinar a connection string pra que ele acesse o banco de dados Postgree. Isso pode ser feito alterando o arquivo src/Review.Web/appsettings.json ou definindo como variável de ambiente (ConnectionStrings__MyConnection)
-
-Exemplo:
-
-ConnectionStrings__MyConnection: Host=localhost;Database=pguser;Username=pguser;Password=Pg@123;
